@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calcul Grinda T</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="container">
+  <h1>Calcul secțiune T din beton armat</h1>
+
+  <!-- CAPITOLUL 1 -->
+  <section class="geom-container capitol">
+    <div class="geom-inputs">
+      <h2>1. Caracteristici geometrice</h2>
+      <label>h<sub>b</sub> (cm): <input type="number" id="hb" value="60" oninput="actualizeazaSectiunea()" /></label>
+      <label>b<sub>b</sub> (cm): <input type="number" id="bb" value="30" oninput="actualizeazaSectiunea()" /></label>
+      <label>h<sub>p</sub> (cm): <input type="number" id="hp" value="12" oninput="actualizeazaSectiunea()" /></label>
+    </div>
+    <canvas id="sectiune" width="450" height="300"></canvas>
+  </section>
+
+  <!-- CAPITOLUL 2 -->
+  <section class="eforturi-container capitol">
+    <h2>2. Eforturi de calcul</h2>
+    <label>M<sub>Ed</sub><sup>(-)</sup> (kNm): <input type="number" id="mEdMinus" /></label>
+    <label>M<sub>Ed</sub><sup>(+)</sup> (kNm): <input type="number" id="mEdPlus" /></label>
+    <label>V<sub>Ed</sub> (kN): <input type="number" id="vEd" /></label>
+  </section>
+
+  <!-- CAPITOLUL 3 -->
+  <section class="materiale-container capitol">
+    <h2>3. Caracteristici materiale</h2>
+    <label>Clasa beton:
+      <select id="clasaBeton" onchange="afiseazaBeton()"></select>
+    </label>
+    <div id="valoriBeton"></div>
+
+    <label>Marca oțel:
+      <select id="marcaOtel" onchange="afiseazaOtel()"></select>
+    </label>
+    <div id="valoriOtel"></div>
+  </section>
+
+  <!-- CAPITOLUL 4.1 -->
+  <section class="armare-container capitol">
+    <h2>4.1 Armare la moment pozitiv (secțiune T dublu armata)</h2>
+
+    <div class="armare-grid">
+      <label>a<sub>1b</sub> (cm): <input type="number" id="a1b" value="3.0" /></label>
+      <label>a<sub>2b</sub> (cm): <input type="number" id="a2b" value="4.0" /></label>
+      <label>Φ (mm): <input type="number" id="fi" value="20" /></label>
+      <label>λ: <input type="number" id="lambda" value="0.8" step="0.1" /></label>
+      <label>η: <input type="number" id="eta" value="1.0" step="0.1" /></label>
+    </div>
+
+    <div class="armare-grid">
+      <label>Φ<sub>1</sub> (mm): <input type="number" id="fi1" value="16" /></label>
+      <label>Φ<sub>2</sub> (mm): <input type="number" id="fi2" value="16" /></label>
+      <label>n<sub>1</sub>: <input type="number" id="n1" value="2" /></label>
+      <label>n<sub>2</sub>: <input type="number" id="n2" value="0" /></label>
+    </div>
+
+    <div class="rezultate-armare" id="rezultateArmare"></div>
+    <button onclick="calculeazaArmare()">Calculează armarea</button>
+<button onclick="deseneazaArmaturaInferioara()">Desenează armatura inferioară</button>
+<canvas id="canvasArmare" width="450" height="300"></canvas>
+  </section>
+</div>
+
+<!-- Scripturi externe -->
+<script src="unitati.js"></script>
+<script src="geometrie.js"></script>
+<script src="beton.js"></script>
+<script src="otel.js"></script>
+<script src="cotare.js"></script>
+<script src="main.js"></script>
+<script src="armare.js"></script>
+<script src="armareGrafica.js"></script>
+</body>
+</html>
